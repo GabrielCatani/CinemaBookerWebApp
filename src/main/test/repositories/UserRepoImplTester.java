@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import java.sql.SQLException;
 
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.HSQL;
+
 
 public class UserRepoImplTester {
 
@@ -25,6 +27,8 @@ public class UserRepoImplTester {
                 .setType(HSQL)
                 .setScriptEncoding("UTF-8")
                 .ignoreFailedDrops(true)
+                .addScript("schema.sql")
+                .addScript("data.sql")
                 .build();
 
         this.userRepo = new UserRepoImpl(this.db);
