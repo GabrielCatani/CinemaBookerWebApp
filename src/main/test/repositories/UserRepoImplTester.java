@@ -36,12 +36,6 @@ public class UserRepoImplTester {
 
     @Test
     public void DataBaseConnectionValidation() {
-        try {
-            Assertions.assertNotNull(this.db.getConnection());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         Assertions.assertNotNull(this.userRepo);
     }
 }

@@ -2,6 +2,7 @@ package cinema.models;
 
 public class User {
     private Long id;
+    private String email;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -10,10 +11,8 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+    public User(String email) {
+        this.email = email;
     }
 
     public Long getId() {
@@ -22,6 +21,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -54,5 +61,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
