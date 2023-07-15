@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
-public class RequestSignInServlet implements Filter {
+public class RequestSignUpServlet implements Filter {
 
     private ServletContext servletContext;
     @Override
@@ -25,15 +25,21 @@ public class RequestSignInServlet implements Filter {
 
             for (Map.Entry<String, String[]> param : params.entrySet()) {
                 for (String value : param.getValue()) {
-                    if (param.getKey().compareTo("login") == 0) {
+                    if (param.getKey().compareTo("email") == 0) {
                         usr.setEmail(value);
+                    } else if (param.getKey().compareTo("firstName") == 0) {
+                        usr.setFirstName(value);
+                    } else if (param.getKey().compareTo("lastName") == 0) {
+                        usr.setLastName(value);
+                    } else if (param.getKey().compareTo("phoneNumber") == 0) {
+                        usr.setPhoneNumber(value);
                     } else if (param.getKey().compareTo("password") == 0) {
                         usr.setPassword(value);
                     }
                 }
             }
 
-            this.servletContext.setAttribute("newUserLogging", usr);
+            this.servletContext.setAttribute("newUser", usr);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

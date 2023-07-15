@@ -15,7 +15,16 @@
     </filter>
     <filter-mapping>
         <filter-name>RequestSignInServlet</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/signIn</url-pattern>
         <servlet-name>SignInServlet</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>RequestSignUpServlet</filter-name>
+        <filter-class>cinema.filters.RequestSignUpServlet</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestSignUpServlet</filter-name>
+        <url-pattern>/signUp</url-pattern>
+        <servlet-name>SignUpServlet</servlet-name>
     </filter-mapping>
 </web-app>

@@ -30,7 +30,7 @@ public class SignInServlet extends HttpServlet {
         ApplicationContext appContext = (ApplicationContext) servletContext.getAttribute("springContext");
 
         UserServiceImpl userService = (UserServiceImpl)appContext.getBean(UserServiceImpl.class);
-        User usr = (User)servletContext.getAttribute("newUser");
+        User usr = (User)servletContext.getAttribute("newUserLogging");
         RequestDispatcher rd;
         if (userService.signInUser(usr)) {
             HttpSession session = request.getSession();

@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean signUpUser(User usr) {
+        System.out.println(usr.toString());
         return false;
     }
 
