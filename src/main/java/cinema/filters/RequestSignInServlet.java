@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
-public class RequestSignIn implements Filter {
+public class RequestSignInServlet implements Filter {
 
     private ServletContext servletContext;
     @Override

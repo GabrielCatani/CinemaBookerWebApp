@@ -6,16 +6,15 @@
          version="4.0">
     <display-name>CinemaBookingWebAppConfig</display-name>
     <welcome-file-list>
-        <welcome-file>WelcomeFile.html</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
-    
+
     <filter>
-        <filter-name>RequestSignIn</filter-name>
-        <filter-class>cinema.filters.RequestSignIn</filter-class>
+        <filter-name>RequestSignInServlet</filter-name>
+        <filter-class>cinema.filters.RequestSignInServlet</filter-class>
     </filter>
-    
     <filter-mapping>
-        <filter-name>RequestSignIn</filter-name>
+        <filter-name>RequestSignInServlet</filter-name>
         <url-pattern>/*</url-pattern>
         <servlet-name>SignInServlet</servlet-name>
     </filter-mapping>

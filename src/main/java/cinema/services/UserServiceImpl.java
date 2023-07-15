@@ -22,6 +22,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean signInUser(User usr) {
-        return false;
+        return true;
     }
 }

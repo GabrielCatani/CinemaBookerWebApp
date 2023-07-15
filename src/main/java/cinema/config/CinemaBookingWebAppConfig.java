@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:../application.properties")
 public class CinemaBookingWebAppConfig {
     @Value("${db.url}")
     private String url;
