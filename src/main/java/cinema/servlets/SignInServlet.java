@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 //TODO: Authenticates user,
-// If valid, redirects to profile.html
+// If valid, redirects to profile.jsp
 // else, redirects to login page
 @WebServlet("/signIn")
 public class SignInServlet extends HttpServlet {
@@ -40,7 +40,9 @@ public class SignInServlet extends HttpServlet {
             Cookie usrCookie = new Cookie("user", usr.getEmail());
             response.addCookie(usrCookie);
 
-            rd = servletContext.getRequestDispatcher("/WEB-INF/html/profile.html");
+            String encodedURL = response.encodeURL("/WEB-INF/jsp/profile.jsp");
+
+            rd = servletContext.getRequestDispatcher(encodedURL);
             rd.forward(request, response);
         }
         else {

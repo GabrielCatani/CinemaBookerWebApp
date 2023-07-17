@@ -3,6 +3,7 @@ package cinema.filters;
 import cinema.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Map;
@@ -34,6 +35,14 @@ public class RequestSignInServlet implements Filter {
             }
 
             this.servletContext.setAttribute("newUserLogging", usr);
+        }
+        else if (httpRequest.getMethod().equalsIgnoreCase("GET")) {
+            HttpSession session = httpRequest.getSession(false);
+            if (session.getAttribute("user") != null) {
+                ServletContext context = httpRequest.getServletContext();
+                context.getRequestDispatcher("/WEB-INF/jsp/profile.jsp").forward(servletRequest, servletResponse);
+            }
+
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
