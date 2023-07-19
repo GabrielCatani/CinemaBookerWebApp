@@ -1,6 +1,7 @@
 package cinema.servlets;
 
 import cinema.models.User;
+import cinema.repositories.UserRepoImpl;
 import cinema.services.UserServiceImpl;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
@@ -32,6 +33,7 @@ public class SignInServlet extends HttpServlet {
         UserServiceImpl userService = (UserServiceImpl)appContext.getBean(UserServiceImpl.class);
         User usr = (User)servletContext.getAttribute("newUserLogging");
         RequestDispatcher rd;
+
         if (userService.signInUser(usr)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", usr.getEmail());
