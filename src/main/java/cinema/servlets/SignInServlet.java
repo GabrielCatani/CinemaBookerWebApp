@@ -1,6 +1,8 @@
 package cinema.servlets;
 
 import cinema.models.User;
+import cinema.repositories.UserLoggingRepo;
+import cinema.repositories.UserLoggingRepoImpl;
 import cinema.repositories.UserRepoImpl;
 import cinema.services.UserServiceImpl;
 import jakarta.servlet.RequestDispatcher;

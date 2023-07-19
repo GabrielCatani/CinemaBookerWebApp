@@ -1,5 +1,6 @@
 package cinema.config;
 
+import cinema.repositories.UserLoggingRepoImpl;
 import cinema.repositories.UserRepoImpl;
 import cinema.services.UserServiceImpl;
 import com.zaxxer.hikari.HikariDataSource;
@@ -49,6 +50,11 @@ public class CinemaBookingWebAppConfig {
     @Bean
     public UserServiceImpl userService(UserRepoImpl userRepo) {
         return new UserServiceImpl(userRepo);
+    }
+
+    @Bean
+    public UserLoggingRepoImpl userLoggingRepo(DataSource dataSource) {
+        return new UserLoggingRepoImpl(dataSource);
     }
 
 }
