@@ -14,10 +14,6 @@ import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 
-
-//TODO: Authenticates user,
-// If valid, redirects to profile.jsp
-// else, redirects to login page
 @WebServlet("/signIn")
 public class SignInServlet extends HttpServlet {
 

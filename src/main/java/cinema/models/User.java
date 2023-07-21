@@ -1,5 +1,7 @@
 package cinema.models;
 
+import java.util.List;
+
 public class User {
     private Long id;
     private String email;
@@ -7,6 +9,8 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String password;
+
+    private List<UserLoggingInfo> nbrOfLogings;
 
     public User() {
     }
@@ -63,6 +67,14 @@ public class User {
         this.password = password;
     }
 
+    public List<UserLoggingInfo> getNbrOfLogings() {
+        return nbrOfLogings;
+    }
+
+    public void setNbrOfLogings(List<UserLoggingInfo> nbrOfLoggings) {
+        this.nbrOfLogings = nbrOfLoggings;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -72,6 +84,9 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
+                ", nbrOfLogings='" + nbrOfLogings.size() + '\'' +
                 '}';
     }
+
+
 }
