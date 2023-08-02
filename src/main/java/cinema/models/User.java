@@ -1,5 +1,6 @@
 package cinema.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -13,6 +14,7 @@ public class User {
     private List<UserLoggingInfo> nbrOfLogings;
 
     public User() {
+        this.nbrOfLogings = new ArrayList<>();
     }
 
     public User(String email) {

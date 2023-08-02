@@ -43,13 +43,13 @@ public class CinemaBookingWebAppConfig {
     }
 
     @Bean
-    public UserRepoImpl userRepo(DataSource dataSource) {
-        return new UserRepoImpl(dataSource);
+    public UserRepoImpl userRepo(DataSource dataSource, BCryptPasswordEncoder passwordEncoder) {
+        return new UserRepoImpl(dataSource, passwordEncoder);
     }
 
     @Bean
-    public UserServiceImpl userService(UserRepoImpl userRepo) {
-        return new UserServiceImpl(userRepo);
+    public UserServiceImpl userService(UserRepoImpl userRepo, PasswordEncoder passwordEncoder) {
+        return new UserServiceImpl(userRepo, passwordEncoder);
     }
 
     @Bean

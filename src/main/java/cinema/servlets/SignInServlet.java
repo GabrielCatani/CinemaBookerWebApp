@@ -32,9 +32,9 @@ public class SignInServlet extends HttpServlet {
         User usr = (User)servletContext.getAttribute("newUserLogging");
         RequestDispatcher rd;
 
-        if (userService.signInUser(usr)) {
+        if (usr != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", usr.getEmail());
+            session.setAttribute("userEmail", usr.getEmail());
             session.setMaxInactiveInterval(30*60);
 
             Cookie usrCookie = new Cookie("user", usr.getEmail());

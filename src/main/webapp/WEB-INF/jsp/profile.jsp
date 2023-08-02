@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="en">
 <head>
 <link rel="stylesheet" type="text/css" href="css/profile_style.css">
@@ -10,7 +10,9 @@
     <div class="user-personal-info">
         <img id="userAvatar" src="images/icon-image-not-found-free-vector.jpg"/>
         <div class="hi-and-logged">
-            <h1>It`s Me [user.email]</h1>
+            <h1>It`s Me </br>
+                ${sessionScope.userEmail}
+            </h1>
             <div class="logged-table">
                 <table>
                     <tr>

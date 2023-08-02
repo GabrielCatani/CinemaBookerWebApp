@@ -1,5 +1,7 @@
 package cinema.repositories;
 
-public interface UserRepo<T> extends CrudRepo{
+import java.util.Optional;
 
+public interface UserRepo<T> extends CrudRepo{
+    Optional findByEmail(String email);
 }

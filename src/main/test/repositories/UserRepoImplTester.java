@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.HSQL;
 
@@ -15,6 +16,8 @@ public class UserRepoImplTester {
     private EmbeddedDatabase db;
 
     private UserRepoImpl userRepo;
+
+    private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void init() {
@@ -27,7 +30,7 @@ public class UserRepoImplTester {
                 .addScript("sql/data.sql")
                 .build();
 
-        this.userRepo = new UserRepoImpl(this.db);
+        this.userRepo = new UserRepoImpl(this.db, this.passwordEncoder);
     }
 
     @Test

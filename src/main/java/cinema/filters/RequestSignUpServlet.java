@@ -1,8 +1,10 @@
 package cinema.filters;
 
 import cinema.models.User;
+import cinema.services.UserServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,6 +21,9 @@ public class RequestSignUpServlet implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         Map<String, String[]> params = httpRequest.getParameterMap();
+
+        ApplicationContext appContext = (ApplicationContext) this.servletContext.getAttribute("springContext");
+        UserServiceImpl userService = (UserServiceImpl) appContext.getBean(UserServiceImpl.class);
 
         if (httpRequest.getMethod().equalsIgnoreCase("POST")) {
             User usr = new User();
@@ -38,6 +43,8 @@ public class RequestSignUpServlet implements Filter {
                     }
                 }
             }
+
+            userService.signUpUser(usr);
 
             this.servletContext.setAttribute("newUser", usr);
         }

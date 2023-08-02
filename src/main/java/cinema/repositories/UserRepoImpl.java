@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -22,11 +23,13 @@ import static java.sql.JDBCType.BIGINT;
 public class UserRepoImpl implements UserRepo{
 
     private DataSource dataSource;
+    private BCryptPasswordEncoder passwordEncoder;
     private String table;
 
     @Autowired
-    public UserRepoImpl(DataSource dataSource) {
+    public UserRepoImpl(DataSource dataSource, BCryptPasswordEncoder passwordEncoder) {
         this.dataSource = dataSource;
+        this.passwordEncoder = passwordEncoder;
         this.table = "cinema_schema.users";
     }
 
@@ -48,6 +51,32 @@ public class UserRepoImpl implements UserRepo{
         };
 
         return Optional.of(template.queryForObject(sql, rowMapper, id));
+    }
+
+    @Override
+    public Optional findByEmail(String email)  {
+        JdbcTemplate template = new JdbcTemplate(this.dataSource);
+        String sql = "SELECT * FROM " + this.table + " WHERE email = ? ";
+
+        RowMapper<User> rowMapper = (rs, rowNum) -> {
+            User usr = new User();
+            usr.setId(rs.getLong("id"));
+            usr.setEmail(rs.getString("email"));
+            usr.setFirstName(rs.getString("firstName"));
+            usr.setLastName(rs.getString("lastName"));
+            usr.setPhoneNumber(rs.getString("phone"));
+            usr.setPassword(rs.getString("passwd"));
+
+            return usr;
+        };
+
+        try {
+            User user = template.queryForObject(sql, rowMapper, email);
+            return Optional.ofNullable(user);
+        }catch (EmptyResultDataAccessException e) {
+            System.err.println("User email not registered!");
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -83,7 +112,7 @@ public class UserRepoImpl implements UserRepo{
                 .addValue("firstName", usr.getFirstName())
                 .addValue("lastName", usr.getLastName())
                 .addValue("phone", usr.getPhoneNumber())
-                .addValue("passwd", usr.getPassword());
+                .addValue("passwd", this.passwordEncoder.encode(usr.getPassword()));
 
         namedTemplate.update(sql, params);
     }
