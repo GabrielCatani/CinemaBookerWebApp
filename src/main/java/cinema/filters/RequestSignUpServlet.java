@@ -44,8 +44,6 @@ public class RequestSignUpServlet implements Filter {
                 }
             }
 
-            userService.signUpUser(usr);
-
             this.servletContext.setAttribute("newUser", usr);
         }
 
