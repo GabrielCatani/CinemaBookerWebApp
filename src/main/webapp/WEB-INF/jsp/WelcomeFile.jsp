@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome Beni!</title>
+    <title>Welcome</title>
 </head>
 <body>
     <h1>Welcome! What would you like to do?</h1>

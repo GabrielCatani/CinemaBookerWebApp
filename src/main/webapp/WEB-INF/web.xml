@@ -26,4 +26,7 @@
         <url-pattern>/signUp</url-pattern>
         <servlet-name>SignUpServlet</servlet-name>
     </filter-mapping>
+    <listener>
+        <listener-class>cinema.listeners.SpringContextLoaderListener</listener-class>
+    </listener>
 </web-app>
