@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class UserLoggingServiceImpl implements UserLoggingService{
@@ -21,7 +24,10 @@ public class UserLoggingServiceImpl implements UserLoggingService{
     @Override
     public List<UserLoggingInfo> getAllUserLoggings(User user) {
         try {
-            return this.userLoggingRepo.findAllByUser(user);
+            List<UserLoggingInfo> logList = this.userLoggingRepo.findAllByUser(user);
+            Collections.sort(logList, Collections.reverseOrder());
+            List<UserLoggingInfo> firstFourElements = logList.subList(0, 4);
+            return new ArrayList<UserLoggingInfo>(firstFourElements);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

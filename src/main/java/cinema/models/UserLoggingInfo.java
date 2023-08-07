@@ -1,11 +1,19 @@
 package cinema.models;
 
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Comparator;
+import java.util.Locale;
 
-public class UserLoggingInfo {
+public class UserLoggingInfo implements Comparable<UserLoggingInfo> {
     private Long id;
     private Long userId;
     private LocalDateTime timestamp;
+    private String Month;
+    private int dayOfMonth;
+    private int hour;
+    private int minute;
+    private int year;
     private String IP;
 
     public UserLoggingInfo() {
@@ -40,6 +48,11 @@ public class UserLoggingInfo {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+        this.Month =  this.timestamp.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        this.dayOfMonth = this.timestamp.getDayOfMonth();
+        this.hour = this.timestamp.getHour();
+        this.minute = this.timestamp.getMinute();
+        this.year = this.timestamp.getYear();
     }
 
     public String getIP() {
@@ -58,5 +71,30 @@ public class UserLoggingInfo {
                 ", timestamp=" + timestamp +
                 ", IP='" + IP + '\'' +
                 '}';
+    }
+
+    public String getMonth() {
+        return Month;
+    }
+
+    public int getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    @Override
+    public int compareTo(UserLoggingInfo o) {
+        return this.timestamp.compareTo(o.getTimestamp());
     }
 }

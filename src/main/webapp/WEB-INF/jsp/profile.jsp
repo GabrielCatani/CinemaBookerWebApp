@@ -21,10 +21,10 @@
                         <th>Time</th>
                         <th>IP</th>
                     </tr>
-                    <c:forEach var="usrLog" items="${logList}">
+                    <c:forEach var="usrLog" items="${logList}" varStatus="loop">
                     <tr>
-                        <td>${usrLog.timestamp}</td>
-                        <td>${usrLog.timestamp}</td>
+                        <td>${usrLog.getMonth()} ${usrLog.getDayOfMonth()}, ${usrLog.getYear()} </td>
+                        <td>${usrLog.getHour()}:${usrLog.getMinute()}</td>
                         <td>${usrLog.IP}</td>
                     </tr>
                     </c:forEach>
