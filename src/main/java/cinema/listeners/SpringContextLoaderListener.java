@@ -14,6 +14,7 @@ public class SpringContextLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
-        servletContext.setAttribute("springContext", new AnnotationConfigApplicationContext(CinemaBookingWebAppConfig.class));
+        servletContext.setAttribute("springContext",
+                                        new AnnotationConfigApplicationContext(CinemaBookingWebAppConfig.class));
     }
 }
