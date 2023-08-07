@@ -40,6 +40,9 @@ public class SignInServlet extends HttpServlet {
         if (usr != null) {
             userLogService.registerUserLogging(usr, request.getRemoteAddr());
             HttpSession session = request.getSession();
+            ArrayList<UserLoggingInfo> logList = (ArrayList<UserLoggingInfo>) userLogService.getAllUserLoggings(usr);
+
+            session.setAttribute("logList", logList);
             session.setAttribute("userEmail", usr.getEmail());
             session.setMaxInactiveInterval(30*60);
 

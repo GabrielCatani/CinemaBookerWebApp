@@ -18,7 +18,6 @@ public class RequestSignInServlet implements Filter {
         this.servletContext = filterConfig.getServletContext();
     }
 
-    //TODO: implement proper login/authentication
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;

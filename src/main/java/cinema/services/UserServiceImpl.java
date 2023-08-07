@@ -33,10 +33,9 @@ public class UserServiceImpl implements UserService {
         Optional opt = this.userRepo.findByEmail(usr.getEmail());
         if (opt.isPresent()) {
             User savedUser = (User) opt.get();
-            return savedUser;
-//            if (this.psswdEncoder.matches(usr.getPassword(), savedUser.getPassword())) {
-//                return savedUser;
-//            }
+            if (this.psswdEncoder.matches(usr.getPassword(), savedUser.getPassword())) {
+                return savedUser;
+            }
         }
         return null;
     }

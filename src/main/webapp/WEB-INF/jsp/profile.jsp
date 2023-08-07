@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
 <link rel="stylesheet" type="text/css" href="css/profile_style.css">
@@ -20,16 +21,13 @@
                         <th>Time</th>
                         <th>IP</th>
                     </tr>
+                    <c:forEach var="usrLog" items="${logList}">
                     <tr>
-                        <td>December 10, 2020</td>
-                        <td>15:34</td>
-                        <td>127.0.0.1</td>
+                        <td>${usrLog.timestamp}</td>
+                        <td>${usrLog.timestamp}</td>
+                        <td>${usrLog.IP}</td>
                     </tr>
-                    <tr>
-                        <td>Now!</td>
-                        <td>15:34</td>
-                        <td>127.0.0.1</td>
-                    </tr>
+                    </c:forEach>
                 </table>
             </div>
         </div>
