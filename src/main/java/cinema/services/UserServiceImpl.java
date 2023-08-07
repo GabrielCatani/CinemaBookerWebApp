@@ -29,12 +29,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signInUser(User usr) {
-        User savedUser = (User)this.userRepo.findByEmail(usr.getEmail()).get();
 
-        if (this.psswdEncoder.matches(usr.getPassword(), savedUser.getPassword())) {
+        Optional opt = this.userRepo.findByEmail(usr.getEmail());
+        if (opt.isPresent()) {
+            User savedUser = (User) opt.get();
             return savedUser;
+//            if (this.psswdEncoder.matches(usr.getPassword(), savedUser.getPassword())) {
+//                return savedUser;
+//            }
         }
-
         return null;
     }
 

@@ -11,10 +11,10 @@ public class User {
     private String phoneNumber;
     private String password;
 
-    private List<UserLoggingInfo> nbrOfLogings;
+    private List<UserLoggingInfo> nbrOfLoggings;
 
     public User() {
-        this.nbrOfLogings = new ArrayList<>();
+        this.nbrOfLoggings = new ArrayList<>();
     }
 
     public User(String email) {
@@ -69,12 +69,12 @@ public class User {
         this.password = password;
     }
 
-    public List<UserLoggingInfo> getNbrOfLogings() {
-        return nbrOfLogings;
+    public List<UserLoggingInfo> getNbrOfLoggings() {
+        return nbrOfLoggings;
     }
 
-    public void setNbrOfLogings(List<UserLoggingInfo> nbrOfLoggings) {
-        this.nbrOfLogings = nbrOfLoggings;
+    public void setNbrOfLoggings(List<UserLoggingInfo> nbrOfLoggings) {
+        this.nbrOfLoggings = nbrOfLoggings;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
-                ", nbrOfLogings='" + nbrOfLogings.size() + '\'' +
+                ", nbrOfLoggings='" + nbrOfLoggings.size() + '\'' +
                 '}';
     }
 

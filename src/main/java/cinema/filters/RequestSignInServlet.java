@@ -39,7 +39,7 @@ public class RequestSignInServlet implements Filter {
                     }
                 }
             }
-            if (userService.signInUser(usr) != null) {
+            if ((usr = userService.signInUser(usr)) != null) {
                 this.servletContext.setAttribute("newUserLogging", usr);
             }
         }

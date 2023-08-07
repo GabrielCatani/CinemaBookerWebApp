@@ -1,5 +1,6 @@
 package cinema.repositories;
 
+import cinema.models.User;
 import cinema.models.UserLoggingInfo;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -116,5 +117,23 @@ public class UserLoggingRepoImpl implements UserLoggingRepo{
         String sql = "DELETE FROM " + this.loggingTable + " WHERE id = ?";
 
         template.update(sql, new Object[]{id});
+    }
+
+    public List<UserLoggingInfo> findAllByUser(User user) throws SQLException {
+        JdbcTemplate template = new JdbcTemplate((this.dataSource));
+        String sql = "SELECT * FROM " + this.loggingTable + " WHERE userid = ?";
+
+        RowMapper<UserLoggingInfo> rowMapper = (rs, rowNum) -> {
+            UserLoggingInfo userLoggingInfo = new UserLoggingInfo();
+
+            userLoggingInfo.setId(rs.getLong("id"));
+            userLoggingInfo.setUserId(rs.getLong("userId"));
+            userLoggingInfo.setTimestamp(rs.getTimestamp("timestamp").toLocalDateTime());
+            userLoggingInfo.setIP(rs.getString("ip"));
+
+            return userLoggingInfo;
+        };
+
+        return template.query(sql, rowMapper, user.getId());
     }
 }

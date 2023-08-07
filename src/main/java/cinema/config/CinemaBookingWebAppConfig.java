@@ -2,6 +2,7 @@ package cinema.config;
 
 import cinema.repositories.UserLoggingRepoImpl;
 import cinema.repositories.UserRepoImpl;
+import cinema.services.UserLoggingServiceImpl;
 import cinema.services.UserServiceImpl;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,4 +58,7 @@ public class CinemaBookingWebAppConfig {
         return new UserLoggingRepoImpl(dataSource);
     }
 
+    @Bean
+    public UserLoggingServiceImpl userLoggingService(UserLoggingRepoImpl userLoggingRepo) {
+        return new UserLoggingServiceImpl((userLoggingRepo));}
 }
