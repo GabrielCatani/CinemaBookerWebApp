@@ -44,11 +44,13 @@
                 <th>Size</th>
                 <th>MIME</th>
             </tr>
+            <c:forEach var="usrImg" items="${imgList}" varStatus="loop">
             <tr>
-                <td><a href="">my_photo.jpeg</a></td>
-                <td>16KB</td>
-                <td>image/jpg</td>
+                <td><a href="/CinemaBookingWebApp/images/${usrImg.getFileName()}">${usrImg.getFileName()}</a></td>
+                <td>${usrImg.getFileSize()}</td>
+                <td>${usrImg.getMimeType()}</td>
             </tr>
+            </c:forEach>
         </table>
     </div>
 </body>
