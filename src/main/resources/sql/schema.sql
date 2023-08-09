@@ -13,3 +13,10 @@ CREATE TABLE IF NOT EXISTS cinema_schema.users_logging(
     timestamp TIMESTAMP,
     ip VARCHAR(100)
 );
+CREATE TABLE IF NOT EXISTS cinema_schema.user_images(
+    id SERIAL PRIMARY KEY,
+    userId SERIAL,
+    fileName VARCHAR(250),
+    fileSize NUMERIC,
+    mime VARCHAR(150)
+);
