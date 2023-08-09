@@ -12,9 +12,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
-@WebServlet("/images")
+@WebServlet("/images/*")
 @MultipartConfig(fileSizeThreshold = 1024*1024*10,
         maxFileSize = 1024*1024*50,
         maxRequestSize = 1024*1024*100)
@@ -55,5 +57,38 @@ public class UploadDownloadImagesServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
         servletContext.getRequestDispatcher("/WEB-INF/jsp/profile.jsp")
                         .forward(request, response);
+    }
+
+    @Override
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException{
+        String requestPath = request.getPathInfo();
+        if (requestPath == null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        ServletContext servletContext = getServletContext();
+        ApplicationContext appContext = (ApplicationContext) servletContext.getAttribute("springContext");
+        Environment env = appContext.getEnvironment();
+        String imgStoreDirPath  = env.getProperty("storage.path");
+
+        File usrImg = new File(imgStoreDirPath, requestPath);
+        if (!usrImg.exists()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        response.setContentType(getServletContext().getMimeType(usrImg.getName()));
+        response.setContentLength((int) usrImg.length());
+
+        try (FileInputStream in = new FileInputStream(usrImg);
+        OutputStream out = response.getOutputStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        }
     }
 }
