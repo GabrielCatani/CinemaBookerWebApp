@@ -30,14 +30,24 @@ public class UploadDownloadImagesServlet extends HttpServlet {
 
         File imgStoreDir = new File(imgStoreDirPath);
         if (!imgStoreDir.exists()) {
-            System.out.println(imgStoreDir.mkdirs());
+            imgStoreDir.mkdirs();
         }
-
-        System.out.println("Upload images are store in: " + imgStoreDir.getAbsolutePath());
 
         String fileName = null;
         for (Part part : request.getParts()) {
             fileName = part.getSubmittedFileName();
+
+            Integer fileIndexer = 1;
+            String tmp = null;
+            while (new File(imgStoreDir.getAbsolutePath() + File.separator + fileName).exists()) {
+                System.out.println(imgStoreDir.getAbsolutePath() + File.separator + fileName);
+                if (fileIndexer != 1) {
+                     tmp = fileName.split("\\(", 2)[0];
+                     fileName = tmp;
+                }
+                fileName = fileName.concat("(" + fileIndexer + ")");
+                fileIndexer++;
+            }
             part.write(imgStoreDir.getAbsolutePath() + File.separator + fileName);
         }
 
