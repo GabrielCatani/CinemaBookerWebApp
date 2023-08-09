@@ -1,5 +1,6 @@
 package cinema.models;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Comparator;
@@ -11,8 +12,8 @@ public class UserLoggingInfo implements Comparable<UserLoggingInfo> {
     private LocalDateTime timestamp;
     private String Month;
     private int dayOfMonth;
-    private int hour;
-    private int minute;
+    private String hour;
+    private String minute;
     private int year;
     private String IP;
 
@@ -50,8 +51,8 @@ public class UserLoggingInfo implements Comparable<UserLoggingInfo> {
         this.timestamp = timestamp;
         this.Month =  this.timestamp.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
         this.dayOfMonth = this.timestamp.getDayOfMonth();
-        this.hour = this.timestamp.getHour();
-        this.minute = this.timestamp.getMinute();
+        this.hour = new DecimalFormat("00").format(this.timestamp.getHour());
+        this.minute = new DecimalFormat("00").format(this.timestamp.getMinute());
         this.year = this.timestamp.getYear();
     }
 
@@ -81,11 +82,11 @@ public class UserLoggingInfo implements Comparable<UserLoggingInfo> {
         return dayOfMonth;
     }
 
-    public int getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public int getMinute() {
+    public String getMinute() {
         return minute;
     }
 
