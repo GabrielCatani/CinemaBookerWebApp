@@ -1,7 +1,10 @@
 package cinema.config;
 
+import cinema.repositories.UserImgRepoImpl;
 import cinema.repositories.UserLoggingRepoImpl;
 import cinema.repositories.UserRepoImpl;
+import cinema.services.UserImagesService;
+import cinema.services.UserImagesServiceImpl;
 import cinema.services.UserLoggingServiceImpl;
 import cinema.services.UserServiceImpl;
 import com.zaxxer.hikari.HikariDataSource;
@@ -61,4 +64,14 @@ public class CinemaBookingWebAppConfig {
     @Bean
     public UserLoggingServiceImpl userLoggingService(UserLoggingRepoImpl userLoggingRepo) {
         return new UserLoggingServiceImpl((userLoggingRepo));}
+
+    @Bean
+    public UserImgRepoImpl userImgRepo(DataSource dataSource) {
+        return new UserImgRepoImpl(dataSource);
+    }
+
+    @Bean
+    public UserImagesServiceImpl userImagesService(UserImgRepoImpl userImgRepo) {
+        return new UserImagesServiceImpl(userImgRepo);
+    }
 }

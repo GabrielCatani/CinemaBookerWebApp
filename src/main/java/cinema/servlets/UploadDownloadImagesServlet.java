@@ -1,5 +1,8 @@
 package cinema.servlets;
 
+import cinema.models.User;
+import cinema.models.UserImgInfo;
+import cinema.services.UserImagesServiceImpl;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -22,6 +25,8 @@ import java.io.OutputStream;
         maxRequestSize = 1024*1024*100)
 public class UploadDownloadImagesServlet extends HttpServlet {
 
+
+
     @Override
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
@@ -36,13 +41,13 @@ public class UploadDownloadImagesServlet extends HttpServlet {
         }
 
         String fileName = null;
+        UserImgInfo userImgInfo = new UserImgInfo();
         for (Part part : request.getParts()) {
             fileName = part.getSubmittedFileName();
 
             Integer fileIndexer = 1;
             String tmp = null;
             while (new File(imgStoreDir.getAbsolutePath() + File.separator + fileName).exists()) {
-                System.out.println(imgStoreDir.getAbsolutePath() + File.separator + fileName);
                 if (fileIndexer != 1) {
                      tmp = fileName.split("\\(", 2)[0];
                      fileName = tmp;
@@ -50,11 +55,24 @@ public class UploadDownloadImagesServlet extends HttpServlet {
                 fileName = fileName.concat("(" + fileIndexer + ")");
                 fileIndexer++;
             }
+            userImgInfo.setFileSize(part.getSize());
+            userImgInfo.setMimeType(part.getContentType());
             part.write(imgStoreDir.getAbsolutePath() + File.separator + fileName);
         }
 
-        request.setAttribute("imgUploaded", fileName + " File uploaded successfully!");
-        response.setStatus(HttpServletResponse.SC_OK);
+        if (fileName != null) {
+            UserImagesServiceImpl userImagesService = (UserImagesServiceImpl) appContext.getBean(UserImagesServiceImpl.class);
+
+            User user = (User) servletContext.getAttribute("newUserLogging");
+
+            userImgInfo.setUserId(user.getId());
+            userImgInfo.setFileName(fileName);
+
+            userImagesService.registerUserImagePath(userImgInfo);
+
+            request.setAttribute("imgUploaded", fileName + " File uploaded successfully!");
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
         servletContext.getRequestDispatcher("/WEB-INF/jsp/profile.jsp")
                         .forward(request, response);
     }
