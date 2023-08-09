@@ -21,7 +21,6 @@ public class WelcomeServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/jsp/WelcomeFile.jsp");
 
-
         rd.forward(request, response);
     }
 }

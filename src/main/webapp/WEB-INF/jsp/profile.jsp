@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/profile_style.css">
     <meta charset="UTF-8">
     <title>Profile</title>
+    <script src="<c:url value='/js/script.js'/>" type="text/javascript"></script>
 </head>
 <body>
     <title>User Profile</title>
@@ -33,7 +34,8 @@
         </div>
     </div>
     <div class="up-button">
-        <input class="upload-button" type="button" value="Upload"/>
+        <input class="upload-button" id="fileInput" type="file" style="display: none"/>
+        <button onclick="chooseFile()">Upload</button>
     </div>
     <div class="files-list">
         <table>
